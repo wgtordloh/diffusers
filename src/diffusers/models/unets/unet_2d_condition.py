@@ -946,9 +946,10 @@ class UNet2DConditionModel(
         return class_emb
 
     def get_aug_embed(
-        self, emb: torch.Tensor, encoder_hidden_states: torch.Tensor, added_cond_kwargs: Dict[str, Any]
+        self, emb: torch.Tensor, encoder_hidden_states: torch.Tensor, added_cond_kwargs: Dict[str, Any] = {}
     ) -> Optional[torch.Tensor]:
         aug_emb = None
+        added_cond_kwargs = {}
         if self.config.addition_embed_type == "text":
             aug_emb = self.add_embedding(encoder_hidden_states)
         elif self.config.addition_embed_type == "text_image":
